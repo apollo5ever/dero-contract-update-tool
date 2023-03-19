@@ -39,6 +39,12 @@ const App = () => {
     const [err, res] = await to(deroBridgeApi.wallet('start-transfer', {
       "scid": event.target.scid.value,
       "ringsize": 2,
+      "transfers":[
+        {
+          "burn":parseInt(event.target.amount.value),
+          "scid":event.target.asset.value
+        }
+      ],
       "fees": parseInt(event.target.fee.value) * 100000,
       "sc_rpc": [{
         "name": "entrypoint",
@@ -93,6 +99,10 @@ const App = () => {
         <input id="var" type="text" />
         <p>Fee</p>
         <input id="fee" type="text" />
+        <p>Asset</p>
+        <input id="asset" type="text" />
+        <p>Amount</p>
+        <input id="amount" type="text" />
         <p>New Code</p>
         <textarea placeholder="Enter New Code Here" rows="44" cols="80" id="code" />
         <button type={"submit"}>Update</button>
