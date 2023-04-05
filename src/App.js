@@ -35,16 +35,18 @@ const App = () => {
   const updateContract = React.useCallback(async (event) => {
     event.preventDefault();
     var code = event.target.code.value
+    var transfers = []
+    if (event.target.amount.value){
+      transfers.push(new Object({
+        "burn":parseInt(event.target.amount.value),
+          "scid":event.target.asset.value
+      }))
+    }
     const deroBridgeApi = deroBridgeApiRef.current
     const [err, res] = await to(deroBridgeApi.wallet('start-transfer', {
       "scid": event.target.scid.value,
       "ringsize": 2,
-      "transfers":[
-        {
-          "burn":parseInt(event.target.amount.value),
-          "scid":event.target.asset.value
-        }
-      ],
+      "transfers":transfers,
       "fees": parseInt(event.target.fee.value) * 100000,
       "sc_rpc": [{
         "name": "entrypoint",
