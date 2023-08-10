@@ -47,7 +47,7 @@ const App = () => {
       "scid": event.target.scid.value,
       "ringsize": 2,
       "transfers":transfers,
-      "fees": parseInt(event.target.fee.value) * 100000,
+      "fees": parseInt(event.target.fee.value * 100000),
       "sc_rpc": [{
         "name": "entrypoint",
         "datatype": "S",
